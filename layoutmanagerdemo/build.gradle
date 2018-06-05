@@ -1,22 +1,27 @@
 apply plugin: 'com.android.application'
 
 android {
+
     signingConfigs {
         config {
             keyAlias 'keystore'
             keyPassword '123456'
-            storeFile file('E:/android_workspace/RecyclerViewSource/layoutmanagerdemo/keystore.jks')
+            storeFile file('./keystore.jks')
             storePassword 'password'
         }
     }
+
     compileSdkVersion 26
     defaultConfig {
-        applicationId "cn.cibntv.ott.recyclerviewsource"
+        applicationId "cn.cibntv.ott.layoutmanagerdemo"
         minSdkVersion 17
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+
+        signingConfig signingConfigs.config
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
     buildTypes {
         release {
@@ -25,6 +30,10 @@ android {
         }
     }
     buildToolsVersion '26.0.2'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 configurations.all {
@@ -34,10 +43,10 @@ configurations.all {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support:support-v4:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation project(':viewpagerlayoutmanager')
     implementation project(':recyclerviewlib')
-    implementation project(':volleylib')
 }

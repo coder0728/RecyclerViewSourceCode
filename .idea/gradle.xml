@@ -9,7 +9,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/layoutmanagerdemo" />
             <option value="$PROJECT_DIR$/recyclerviewlib" />
+            <option value="$PROJECT_DIR$/viewpagerlayoutmanager" />
             <option value="$PROJECT_DIR$/volleylib" />
           </set>
         </option>

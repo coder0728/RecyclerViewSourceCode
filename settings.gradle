@@ -1,1 +1,1 @@
-include ':app', ':recyclerviewlib', ':volleylib'
+include ':app', ':recyclerviewlib', ':volleylib', ':viewpagerlayoutmanager', ':layoutmanagerdemo'

@@ -608,6 +608,10 @@ public class RecyclerView extends ViewGroup implements ScrollingView, NestedScro
         ViewCompat.setAccessibilityDelegate(this, mAccessibilityDelegate);
     }
 
+    public void setMAX_SCROLL_DURATION(int MAX_SCROLL_DURATION) {
+        this.MAX_SCROLL_DURATION = MAX_SCROLL_DURATION;
+    }
+
     /**
      * Instantiate and set a LayoutManager, if specified in the attributes.
      */
@@ -1925,6 +1929,7 @@ public class RecyclerView extends ViewGroup implements ScrollingView, NestedScro
         return mLayoutFrozen;
     }
 
+
     /**
      * Animate a scroll by the given amount of pixels along either axis.
      *
@@ -1932,9 +1937,21 @@ public class RecyclerView extends ViewGroup implements ScrollingView, NestedScro
      * @param dy Pixels to scroll vertically
      */
     public void smoothScrollBy(int dx, int dy) {
+        smoothScrollBy(dx, dy, null);
+    }
+
+    /**
+     * Animate a scroll by the given amount of pixels along either axis.
+     *
+     * @param dx Pixels to scroll horizontally
+     * @param dy Pixels to scroll vertically
+     * @param interpolator {@link Interpolator} to be used for scrolling. If it is
+     *                     {@code null}, RecyclerView is going to use the default interpolator.
+     */
+    public void smoothScrollBy(int dx, int dy, Interpolator interpolator) {
         if (mLayout == null) {
-            Log.e(TAG, "Cannot smooth scroll without a LayoutManager set. " +
-                    "Call setLayoutManager with a non-null argument.");
+            Log.e(TAG, "Cannot smooth scroll without a LayoutManager set. "
+                    + "Call setLayoutManager with a non-null argument.");
             return;
         }
         if (mLayoutFrozen) {
@@ -1947,7 +1964,7 @@ public class RecyclerView extends ViewGroup implements ScrollingView, NestedScro
             dy = 0;
         }
         if (dx != 0 || dy != 0) {
-            mViewFlinger.smoothScrollBy(dx, dy);
+            mViewFlinger.smoothScrollBy(dx, dy, interpolator);
         }
     }
 
@@ -4749,6 +4766,11 @@ public class RecyclerView extends ViewGroup implements ScrollingView, NestedScro
 
         public void smoothScrollBy(int dx, int dy, int duration) {
             smoothScrollBy(dx, dy, duration, sQuinticInterpolator);
+        }
+
+        public void smoothScrollBy(int dx, int dy, Interpolator interpolator) {
+            smoothScrollBy(dx, dy, computeScrollDuration(dx, dy, 0, 0),
+                    interpolator == null ? sQuinticInterpolator : interpolator);
         }
 
         public void smoothScrollBy(int dx, int dy, int duration, Interpolator interpolator) {
