@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
 import cn.cibntv.ott.lib.layoutmanager.CarouselLayoutManager;
+import cn.cibntv.ott.lib.layoutmanager.ScaleLayoutManager;
+import cn.cibntv.ott.lib.layoutmanager.ViewPagerLayoutManager;
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private CarouselLayoutManager carouselLayoutManager;
+    private ViewPagerLayoutManager layoutManager;
     private DataAdapter adapter;
 
     @Override
@@ -20,8 +22,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler);
         adapter = new DataAdapter();
         recyclerView.setAdapter(adapter);
-        carouselLayoutManager = new CarouselLayoutManager(this, Util.Dp2px(this, 260));
+        layoutManager = new CarouselLayoutManager(this, Util.Dp2px(this, 260));
+//        layoutManager = new ScaleLayoutManager(this, Util.Dp2px(this, 10), ViewPagerLayoutManager.HORIZONTAL);
         recyclerView.setMAX_SCROLL_DURATION(300);
-        recyclerView.setLayoutManager(carouselLayoutManager);
+        recyclerView.setLayoutManager(layoutManager);
     }
 }

@@ -429,7 +429,6 @@ public abstract class ViewPagerLayoutManager extends LinearLayoutManager {
     @Override
     public void onLayoutCompleted(RecyclerView.State state) {
         super.onLayoutCompleted(state);
-        System.out.println("-------onLayoutCompleted-------");
         mPendingSavedState = null;
         mPendingScrollPosition = NO_POSITION;
     }
